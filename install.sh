@@ -13,7 +13,7 @@ sudo rm -rf ~/.config/nvim
 sudo rm -rf ~/.local/state/nvim
 sudo rm -rf ~/.local/share/nvim
 
-ln -s "$(pwd)"/nvim ~/.config/nvim
+ln -s "$(pwd)"/nvim $HOME/.config/nvim
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
 unzip Hack.zip
@@ -27,3 +27,4 @@ rm Hack.zip
 gsettings set org.gnome.desktop.interface font-name 'Hack Nerd Font Regular 10'
 
 sudo apt install tmux
+ln -s "$(pwd)"/.tmux.conf $HOME/.tmux.conf
