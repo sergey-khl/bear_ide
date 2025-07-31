@@ -13,7 +13,7 @@ sudo rm -rf ~/.config/nvim
 sudo rm -rf ~/.local/state/nvim
 sudo rm -rf ~/.local/share/nvim
 
-ln -s "$(pwd)"/nvim $HOME/.config/nvim
+ln -sfn "$(pwd)"/nvim "$HOME/.config/nvim"
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
 unzip Hack.zip

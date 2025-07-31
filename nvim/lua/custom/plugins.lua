@@ -23,38 +23,22 @@ return {
           null_ls.builtins.formatting.shfmt,
         },
       }
-      null_ls.setup {
-        sources = sources,
-
-        -- ths is buns, fix later
-        on_attach = function(client, bufnr) end,
-      }
     end,
   },
   {
-    "neovim/nvim-lspconfig",
+    "stevearc/oil.nvim",
+    lazy = false,
+    dependencies = { { "echasnovski/mini.icons", opts = {} } },
     config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
-    end,
-  },
-  {
-    "ojroques/nvim-osc52",
-    config = function()
-      require("osc52").setup {
-        max_length = 0, -- No limit
-        silent = false, -- Show message on copy
-        trim = false,
+      print "SOFIndond"
+      local opts = {
+        default_file_explorer = true,
+        view_options = {
+          show_hidden = true,
+        },
       }
-
-      -- Automatically copy on yank
-      local function copy()
-        if vim.v.event.operator == "y" and vim.v.event.regname == "d" then
-          require("osc52").copy_register ""
-        end
-      end
-
-      vim.api.nvim_create_autocmd("TextYankPost", { callback = copy })
+      require("oil").setup(opts)
+      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
     end,
   },
 }
