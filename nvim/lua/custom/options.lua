@@ -19,10 +19,6 @@ vim.api.nvim_create_autocmd("InsertLeave", {
   command = "silent! wa",
 })
 
-vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#00ff00", bg = "NONE" })
-vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#ffaa00", bg = "NONE" })
-vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#ff0000", bg = "NONE" })
-
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "markdown", "text" },
     callback = function()
@@ -32,7 +28,7 @@ vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("SpellCheck", { clear = true })
 })
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "json",
+    pattern = {"json", "lua" },
     callback = function()
         vim.bo.shiftwidth = 2
         vim.bo.tabstop = 2

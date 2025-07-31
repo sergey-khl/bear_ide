@@ -20,32 +20,70 @@ return {
     end,
   },
   {
-    "Pocco81/auto-save.nvim",
+    "lewis6991/gitsigns.nvim",
+    event = "BufReadPre",
+
     config = function()
-      require("auto-save").setup {}
-    end,
-  },
-  {
-    "nvimtools/none-ls.nvim",
-    dependencies = { "williamboman/mason.nvim", "jay-babu/mason-null-ls.nvim" },
-    config = function()
-      local null_ls = require "null-ls"
-      null_ls.setup {
-        sources = {
-          null_ls.builtins.formatting.black,
-          null_ls.builtins.diagnostics.ruff,
-          null_ls.builtins.formatting.prettier,
-          null_ls.builtins.diagnostics.eslint_d,
-          null_ls.builtins.formatting.eslint_d,
-          null_ls.builtins.formatting.rustfmt,
-          null_ls.builtins.formatting.gofumpt,
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.shfmt,
+      require("gitsigns").setup {
+        signs = {
+          add = { hl = "GitSignsAdd", text = "+", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+          change = {
+            hl = "GitSignsChange",
+            text = "│",
+            numhl = "GitSignsChangeNr",
+            linehl = "GitSignsChangeLn",
+          },
+          delete = { hl = "GitSignsDelete", text = "_", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+          topdelete = {
+            hl = "GitSignsDelete",
+            text = "‾",
+            numhl = "GitSignsDeleteNr",
+            linehl = "GitSignsDeleteLn",
+          },
+          changedelete = {
+            hl = "GitSignsChange",
+            text = "~",
+            numhl = "GitSignsChangeNr",
+            linehl = "GitSignsChangeLn",
+          },
+          untracked = { hl = "GitSignsAdd", text = "┆", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
         },
       }
     end,
   },
-
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require("nvchad.configs.lspconfig").defaults()
+      require "configs.lspconfig"
+    end,
+  },
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "lua-language-server",
+        "stylua",
+        "html-lsp",
+        "css-lsp",
+        "prettier",
+        "pyright"
+      },
+    },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
+        "python",
+      },
+    },
+  },
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
 
