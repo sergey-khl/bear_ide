@@ -27,4 +27,4 @@ rm Hack.zip
 gsettings set org.gnome.desktop.interface font-name 'Hack Nerd Font Regular 10'
 
 sudo apt install tmux
-ln -s "$(pwd)"/.tmux.conf $HOME/.tmux.conf
+ln -sfn "$(pwd)"/.tmux.conf $HOME/.tmux.conf

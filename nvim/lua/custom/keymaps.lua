@@ -33,3 +33,7 @@ map("n", "<leader>gb",
         package.loaded.gitsigns.blame_line()
     end,
     { desc = "Blame line" })
+
+
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
