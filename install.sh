@@ -1,3 +1,4 @@
+# neovim install 
 curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
 sudo rm -rf ~/.local/nvim
 sudo tar -C ~/.local -xzf nvim-linux-x86_64.tar.gz
@@ -26,12 +27,19 @@ rm Hack.zip
 
 gsettings set org.gnome.desktop.interface font-name 'Hack Nerd Font Regular 10'
 
+# terminal multiplexer
 sudo apt install tmux
 ln -sfn "$(pwd)"/.tmux.conf $HOME/.tmux.conf
 
+# git manager
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 tar xf lazygit.tar.gz lazygit
 sudo install lazygit -D -t /usr/local/bin/
 rm lazygit
 rm lazygit.tar.gz
+
+# encrypted syncing
+# install v1.70.3 from https://rclone.org/downloads/
+sudo npm install @dotenvx/dotenvx --save -g
+
