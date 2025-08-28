@@ -128,5 +128,29 @@ return {
     keys = {
         { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
     }
+  },
+  {
+    "sindrets/diffview.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    lazy = false,
+    config = function()
+      local diffview = require("diffview")
+
+      diffview.setup({
+        enhanced_diff_hl = true, -- better syntax-aware highlighting
+        view = {
+          merge_tool = {
+            layout = "diff3_mixed",
+          },
+        },
+      })
+
+      -- Keymaps for quick access
+      local map = vim.keymap.set
+      map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Open Diffview" })
+      map("n", "<leader>gD", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview" })
+      map("n", "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", { desc = "File History" })
+      map("n", "<leader>gH", "<cmd>DiffviewFileHistory<cr>", { desc = "Repo History" })
+    end,
   }
 }
