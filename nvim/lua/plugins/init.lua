@@ -92,6 +92,10 @@ return {
         "css",
         "python",
       },
+      highlight = {
+        enable = true,
+        use_languagetree = true,
+      },
     },
   },
   {
