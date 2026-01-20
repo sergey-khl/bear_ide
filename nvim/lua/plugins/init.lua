@@ -162,5 +162,13 @@ return {
       map("n", "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", { desc = "File History" })
       map("n", "<leader>gH", "<cmd>DiffviewFileHistory<cr>", { desc = "Repo History" })
     end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {},
+    config = function()
+        require("ibl").setup() 
+    end,
   }
 }
