@@ -49,6 +49,8 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install node
 nvm use node
 
+npm install -g tree-sitter-cli@0.22.6
+
 # encrypted syncing
 # install v1.70.3 from https://rclone.org/downloads/
 sudo npm install @dotenvx/dotenvx --save -g
