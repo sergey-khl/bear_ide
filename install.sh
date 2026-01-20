@@ -70,7 +70,3 @@ export PATH="$NVM_DIR/versions/node/v18.19.1/bin:$PATH"
 npm install -g npm@9.2.0
 npm install -g tree-sitter-cli@0.22.6
 
-# encrypted syncing
-# install v1.70.3 from https://rclone.org/downloads/
-sudo npm install @dotenvx/dotenvx --save -g
-
