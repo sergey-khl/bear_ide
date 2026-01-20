@@ -83,22 +83,26 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = { "OXY2DEV/markview.nvim" },
     lazy = false,
+    priority = 1000,
+    build = ":TSUpdate",
+    dependencies = { "OXY2DEV/markview.nvim" },
     opts = {
       ensure_installed = {
-        "vim",
-        "lua",
-        "vimdoc",
-        "html",
-        "css",
-        "python",
+        "vim", "lua", "vimdoc", "html", "css", "python"
       },
       highlight = {
         enable = true,
         use_languagetree = true,
       },
     },
+    config = function(_, opts)
+      -- require("nvim-treesitter.install").compilers = { "gcc" } 
+      require'nvim-treesitter'.install {'python'}
+
+
+      -- require("nvim-treesitter.configs").setup(opts)
+    end,
   },
   {
     "ojroques/vim-oscyank",
