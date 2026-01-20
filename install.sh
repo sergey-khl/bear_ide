@@ -1,3 +1,8 @@
+# NOTES
+# after install make sure to :Lazy and then sync
+# also make sure to do :MasonToolsInstall and check mason that 
+# everything you need is there
+
 # neovim install 
 curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
 sudo rm -rf ~/.local/nvim
