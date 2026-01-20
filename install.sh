@@ -9,6 +9,8 @@ mkdir -p ~/.local
 mkdir -p ~/.local/bin
 mkdir -p ~/.config
 
+INSTALL_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 # neovim install 
 # curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
 # for older linux ex 20
@@ -27,8 +29,7 @@ sudo rm -rf ~/.config/nvim
 sudo rm -rf ~/.local/state/nvim
 sudo rm -rf ~/.local/share/nvim
 
-# sometimes gotta do this manually
-ln -sfn "$(pwd)"/nvim "$HOME/.config/nvim"
+ln -sfn "$INSTALL_DIR"/nvim "$HOME/.config/nvim"
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
 unzip Hack.zip
