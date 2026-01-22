@@ -77,6 +77,11 @@ return {
           "css-lsp",
           "prettier",
           "pyright",
+          "clang-format",
+          "gersemi",
+          "markdownlint",
+          "shellcheck",
+          "shfmt",
         },
       })
     end,
@@ -87,8 +92,29 @@ return {
     priority = 1000,
     build = ":TSUpdate",
     dependencies = { "OXY2DEV/markview.nvim" },
-    config = function(_, opts)
-      require'nvim-treesitter'.install { "vim", "lua", "vimdoc", "html", "css", "python" }
+    config = function(_)
+      to_install = {
+        "vim", "lua", "vimdoc", "luadoc", "query",
+        "html", "css", "javascript", "typescript", "json",
+        "python",
+        -- 4. ROS & Systems (Crucial for C++ nodes & build)
+        "c", "cpp",
+        "cmake",
+        "make",
+        "bash",
+        -- 5. Config & Data (ROS params, URDFs, Launch files)
+        "yaml",             -- Critical for ROS .yaml param files
+        "xml",              -- Critical for URDF, SDF, and package.xml
+        "toml",             -- For Rust or Python tool configs (pyproject.toml)
+        -- 6. Documentation
+        "markdown",         -- Structure of markdown files
+        "markdown_inline",  -- **Bold**, *Italic*, and code blocks inside markdown
+        "rst",              -- reStructuredText (Standard for Python Sphinx docs)
+        "latex",            -- Academic papers / Complex math
+        -- 7. Git (Helpful for diffs and commit messages)
+        "git_config", "gitcommit", "gitignore", "diff",
+      }
+      require'nvim-treesitter'.install(to_install)
     end,
   },
   {
