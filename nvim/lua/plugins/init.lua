@@ -97,6 +97,7 @@ return {
         "vim", "lua", "vimdoc", "luadoc", "query",
         "html", "css", "javascript", "typescript", "json",
         "python",
+        "c_sharp",
         -- 4. ROS & Systems (Crucial for C++ nodes & build)
         "c", "cpp",
         "cmake",

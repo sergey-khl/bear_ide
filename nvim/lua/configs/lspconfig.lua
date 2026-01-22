@@ -9,6 +9,7 @@ local servers = {
   "jsonls",
   "lua_ls",
   "pyright",
+  "omnisharp",
   "clangd",
   "cmake",
   "yamlls",
