@@ -88,7 +88,7 @@ return {
     build = ":TSUpdate",
     dependencies = { "OXY2DEV/markview.nvim" },
     config = function(_, opts)
-      require'nvim-treesitter'.install({ "vim", "lua", "vimdoc", "html", "css", "python" })
+      require'nvim-treesitter'.install { "vim", "lua", "vimdoc", "html", "css", "python" }
     end,
   },
   {
