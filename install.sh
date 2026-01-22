@@ -1,5 +1,20 @@
+#!/bin/bash
+
+# NOTES
+# after install make sure to :Lazy and then sync
+# also make sure to do :MasonToolsInstall and check mason that 
+# everything you need is there
+
+mkdir -p ~/.local
+mkdir -p ~/.local/bin
+mkdir -p ~/.config
+
+INSTALL_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 # neovim install 
-curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
+# curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
+# for older linux ex 20
+curl -LO https://github.com/neovim/neovim-releases/releases/download/v0.11.5/nvim-linux-x86_64.tar.gz
 sudo rm -rf ~/.local/nvim
 sudo tar -C ~/.local -xzf nvim-linux-x86_64.tar.gz
 mv ~/.local/nvim-linux-x86_64 ~/.local/nvim
@@ -14,7 +29,7 @@ sudo rm -rf ~/.config/nvim
 sudo rm -rf ~/.local/state/nvim
 sudo rm -rf ~/.local/share/nvim
 
-ln -sfn "$(pwd)"/nvim "$HOME/.config/nvim"
+ln -sfn "$INSTALL_DIR"/nvim "$HOME/.config/nvim"
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
 unzip Hack.zip
@@ -39,7 +54,20 @@ sudo install lazygit -D -t /usr/local/bin/
 rm lazygit
 rm lazygit.tar.gz
 
-# encrypted syncing
-# install v1.70.3 from https://rclone.org/downloads/
-sudo npm install @dotenvx/dotenvx --save -g
+# ensure npm installed
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+# load nvm immediately
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+nvm install v18.19.1
+nvm use v18.19.1
+
+# load node immediately
+export PATH="$NVM_DIR/versions/node/v18.19.1/bin:$PATH"
+
+npm install -g npm@9.2.0
+npm install -g tree-sitter-cli@0.22.6
 

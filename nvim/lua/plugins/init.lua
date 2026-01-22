@@ -60,29 +60,36 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "lua-language-server",
-        "stylua",
-        "html-lsp",
-        "css-lsp",
-        "prettier",
-        "pyright",
-      },
+    dependencies = {
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
+    config = function()
+      local mason = require("mason")
+      local mason_tool_installer = require("mason-tool-installer")
+
+      mason.setup()
+
+      mason_tool_installer.setup({
+        ensure_installed = {
+          "lua-language-server",
+          "stylua",
+          "html-lsp",
+          "css-lsp",
+          "prettier",
+          "pyright",
+        },
+      })
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "vim",
-        "lua",
-        "vimdoc",
-        "html",
-        "css",
-        "python",
-      },
-    },
+    lazy = false,
+    priority = 1000,
+    build = ":TSUpdate",
+    dependencies = { "OXY2DEV/markview.nvim" },
+    config = function(_, opts)
+      require'nvim-treesitter'.install({ "vim", "lua", "vimdoc", "html", "css", "python" })
+    end,
   },
   {
     "ojroques/vim-oscyank",
@@ -103,11 +110,6 @@ return {
         end,
       })
     end,
-  },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    dependencies = { "OXY2DEV/markview.nvim" },
-    lazy = false,
   },
   {
     "kdheepak/lazygit.nvim",
@@ -151,6 +153,14 @@ return {
       map("n", "<leader>gD", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview" })
       map("n", "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", { desc = "File History" })
       map("n", "<leader>gH", "<cmd>DiffviewFileHistory<cr>", { desc = "Repo History" })
+    end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {},
+    config = function()
+        require("ibl").setup() 
     end,
   }
 }
