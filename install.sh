@@ -29,7 +29,7 @@ gsettings set org.gnome.desktop.interface font-name 'Hack Nerd Font Regular 10'
 
 # terminal multiplexer
 sudo apt install tmux
-ln -sfn "$(pwd)"/.tmux.conf $HOME/.tmux.conf
+ln -sfn "$(pwd)"/.tmux.conf "$HOME/.tmux.conf"
 
 # git manager
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
