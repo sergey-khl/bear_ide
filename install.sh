@@ -12,9 +12,15 @@ mkdir -p ~/.config
 INSTALL_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 # neovim install 
-curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
-# for older linux ex 20
-# curl -LO https://github.com/neovim/neovim-releases/releases/download/v0.11.5/nvim-linux-x86_64.tar.gz
+UBUNTU_VER=$(lsb_release -rs | cut -d. -f1)
+if [ "$UBUNTU_VER" -gte 22 ]; then
+    echo "Version is >= 22. Installing latest stable Neovim..."
+    curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
+else
+    echo "Version is < 22. Installing Neovim for older Linux..."
+    curl -LO https://github.com/neovim/neovim-releases/releases/download/v0.11.5/nvim-linux-x86_64.tar.gz
+fi
+
 sudo rm -rf ~/.local/nvim
 sudo tar -C ~/.local -xzf nvim-linux-x86_64.tar.gz
 mv ~/.local/nvim-linux-x86_64 ~/.local/nvim
