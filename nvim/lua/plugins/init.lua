@@ -93,7 +93,7 @@ return {
     build = ":TSUpdate",
     dependencies = { "OXY2DEV/markview.nvim" },
     config = function(_)
-      to_install = {
+      local to_install = {
         "vim", "lua", "vimdoc", "luadoc", "query",
         "html", "css", "javascript", "typescript", "json",
         "python",
