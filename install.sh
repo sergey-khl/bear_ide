@@ -75,5 +75,12 @@ nvm use v18.19.1
 export PATH="$NVM_DIR/versions/node/v18.19.1/bin:$PATH"
 
 npm install -g npm@9.2.0
-npm install -g tree-sitter-cli@0.22.6
+
+if [ "$UBUNTU_VER" -gte 22 ]; then
+    echo "Version is >= 22. Installing latest stable treesitter..."
+    npm install -g tree-sitter-cli@0.22.6
+else
+    echo "Version is < 22. Installing treesitter for older Linux..."
+    npm install -g tree-sitter-cli@0.26.3
+fi
 
