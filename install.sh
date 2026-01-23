@@ -74,6 +74,7 @@ nvm use v18.19.1
 # load node immediately
 export PATH="$NVM_DIR/versions/node/v18.19.1/bin:$PATH"
 
+sudo apt install python3-venv # needed for some lsp
 npm install -g npm@9.2.0
 
 if [ "$UBUNTU_VER" -gte 22 ]; then

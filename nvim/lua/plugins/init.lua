@@ -78,6 +78,7 @@ return {
           "prettier",
           "pyright",
           "clang-format",
+          "clangd",
           "gersemi",
           "markdownlint",
           "shellcheck",
