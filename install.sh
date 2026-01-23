@@ -78,9 +78,9 @@ npm install -g npm@9.2.0
 
 if [ "$UBUNTU_VER" -gte 22 ]; then
     echo "Version is >= 22. Installing latest stable treesitter..."
-    npm install -g tree-sitter-cli@0.22.6
+    npm install -g tree-sitter-cli@0.26.3
 else
     echo "Version is < 22. Installing treesitter for older Linux..."
-    npm install -g tree-sitter-cli@0.26.3
+    npm install -g tree-sitter-cli@0.22.6
 fi
 
