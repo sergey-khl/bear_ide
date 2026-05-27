@@ -58,9 +58,6 @@ font_size        11.0
 term xterm-256color
 enable_audio_bell no
 
-# copy/paste
-clipboard_control write-clipboard write-primary read-clipboard-ask read-primary-ask
-
 # start maximized
 remember_window_size  no
 initial_window_width  1920
