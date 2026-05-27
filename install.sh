@@ -104,6 +104,8 @@ export FZF_BASE="$HOME/.fzf"
 # nvim + local bin on PATH
 export PATH="$HOME/.local/nvim/bin:$HOME/.local/bin:$PATH"
 
+alias lg="lazygit"
+
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
