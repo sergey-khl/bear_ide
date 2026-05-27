@@ -68,6 +68,8 @@ map ctrl+shift+enter --cwd=current
 map ctrl+shift+t --cwd=current --type=tab
 EOF
 
+sudo apt install -y xclip
+
 # zsh + oh-my-zsh + plugins
 sudo apt install -y zsh
 
