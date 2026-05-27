@@ -61,6 +61,15 @@ enable_audio_bell no
 
 # copy/paste
 clipboard_control write-clipboard write-primary read-clipboard-ask read-primary-ask
+
+# start maximized
+remember_window_size  no
+initial_window_width  1920
+initial_window_height 1080
+
+# new windows/tabs inherit cwd
+map ctrl+shift+n new_os_window_with_cwd
+map ctrl+shift+t new_tab_with_cwd
 EOF
 
 # zsh + oh-my-zsh + plugins
