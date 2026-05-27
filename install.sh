@@ -34,6 +34,7 @@ sudo apt-get update && sudo apt-get install -y ripgrep
 sudo rm -rf ~/.config/nvim
 sudo rm -rf ~/.local/state/nvim
 sudo rm -rf ~/.local/share/nvim
+sudo rm -rf "$HOME/.oh-my-zsh"
 
 ln -sfn "$INSTALL_DIR"/nvim "$HOME/.config/nvim"
 
@@ -41,19 +42,63 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
 unzip Hack.zip
 mkdir -p $HOME/.local/share/fonts
 mv "$(pwd)"/*.ttf $HOME/.local/share/fonts/
-rm LICENSE.md README.md
+rm -f LICENSE.md README.md Hack.zip
 fc-cache -fv
 
-rm Hack.zip
+# kitty terminal
+sudo apt install kitty
+mkdir -p ~/.config/kitty
+cat > ~/.config/kitty/kitty.conf << 'EOF'
+font_family      Hack Nerd Font
+bold_font        Hack Nerd Font Bold
+italic_font      Hack Nerd Font Italic
+bold_italic_font Hack Nerd Font Bold Italic
+font_size        11.0
 
-gsettings set org.gnome.desktop.interface font-name 'Hack Nerd Font Regular 10'
+# better for nvim
+term xterm-256color
+enable_audio_bell no
+
+# copy/paste
+clipboard_control write-clipboard write-primary read-clipboard-ask read-primary-ask
+EOF
+
+# zsh + oh-my-zsh + plugins
+sudo apt install -y zsh fzf
+
+# install oh-my-zsh unattended
+RUNZSH=no CHSH=no sh -c \
+  "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+  "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting \
+  "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+
+# write ~/.zshrc
+cat > ~/.zshrc << 'EOF'
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+
+plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting)
+
+source $ZSH/oh-my-zsh.sh
+
+# nvim + local bin on PATH
+export PATH="$HOME/.local/nvim/bin:$HOME/.local/bin:$PATH"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+EOF
+
+# make zsh default shell
+chsh -s "$(which zsh)"
 
 # terminal multiplexer
 sudo apt install tmux
 ln -sfn "$INSTALL_DIR"/.tmux.conf "$HOME/.tmux.conf"
-
-# warp settings
-ln -sfn "$INSTALL_DIR"/settings.toml "$HOME/.config/warp-terminal/settings.toml"
 
 # git manager
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
@@ -69,7 +114,6 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 # load nvm immediately
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 nvm install v18.19.1
 nvm use v18.19.1
@@ -88,3 +132,4 @@ else
     npm install -g tree-sitter-cli@0.22.6
 fi
 
+echo "Done! Log out and back in for zsh to become your default shell."

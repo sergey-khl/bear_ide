@@ -112,7 +112,6 @@ return {
         "markdown",         -- Structure of markdown files
         "markdown_inline",  -- **Bold**, *Italic*, and code blocks inside markdown
         "rst",              -- reStructuredText (Standard for Python Sphinx docs)
-        "latex",            -- Academic papers / Complex math
         -- 7. Git (Helpful for diffs and commit messages)
         "git_config", "gitcommit", "gitignore", "diff",
       }
