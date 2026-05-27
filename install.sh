@@ -24,7 +24,6 @@ fi
 sudo rm -rf ~/.local/nvim
 sudo tar -C ~/.local -xzf nvim-linux-x86_64.tar.gz
 mv ~/.local/nvim-linux-x86_64 ~/.local/nvim
-echo -e "\nexport PATH=\"\$HOME/.local/nvim/bin:\$PATH\"" >> ~/.bashrc
 rm nvim-linux-x86_64.tar.gz
 
 cd ~/.local/bin || exit
@@ -68,17 +67,24 @@ initial_window_width  1920
 initial_window_height 1080
 
 # new windows/tabs inherit cwd
-map ctrl+shift+n new_os_window_with_cwd
-map ctrl+shift+t new_tab_with_cwd
+map ctrl+shift+enter --cwd=current
+map ctrl+shift+t --cwd=current --type=tab
 EOF
 
 # zsh + oh-my-zsh + plugins
-sudo apt install -y zsh fzf
+sudo apt install -y zsh
 
 # install oh-my-zsh unattended
 RUNZSH=no CHSH=no sh -c \
   "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+curl -fsSL https://github.com/junegunn/fzf/releases/download/v0.54.3/fzf-0.54.3-linux_amd64.tar.gz | \
+  tar -xz -C "$HOME/.local/bin"
+mkdir -p "$HOME/.fzf"
+curl -fsSL https://raw.githubusercontent.com/junegunn/fzf/v0.54.3/shell/key-bindings.zsh \
+  -o ~/.fzf/key-bindings.zsh
+curl -fsSL https://raw.githubusercontent.com/junegunn/fzf/v0.54.3/shell/completion.zsh \
+  -o ~/.fzf/completion.zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions \
   "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting \
@@ -89,9 +95,14 @@ cat > ~/.zshrc << 'EOF'
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 
-plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
+
+# fzf
+export FZF_BASE="$HOME/.fzf"
+[ -f "$HOME/.fzf/key-bindings.zsh" ] && source "$HOME/.fzf/key-bindings.zsh"
+[ -f "$HOME/.fzf/completion.zsh" ] && source "$HOME/.fzf/completion.zsh"
 
 # nvim + local bin on PATH
 export PATH="$HOME/.local/nvim/bin:$HOME/.local/bin:$PATH"
