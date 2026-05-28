@@ -39,15 +39,4 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
-vim.g.clipboard = {
-  name = "OSC 52",
-  copy = {
-    ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-    ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-  },
-   paste = {
-    ["+"] = function() return { vim.fn.split(vim.fn.getreg("0"), "\n") } end,
-    ["*"] = function() return { vim.fn.split(vim.fn.getreg("0"), "\n") } end,
-  },
-}
 vim.opt.clipboard = "unnamedplus"
