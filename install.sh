@@ -64,8 +64,8 @@ initial_window_width  1920
 initial_window_height 1080
 
 # new windows/tabs inherit cwd
-map ctrl+shift+enter --cwd=current
-map ctrl+shift+t --cwd=current --type=tab
+map ctrl+shift+enter launch --cwd=current
+map ctrl+shift+t launch --cwd=current --type=tab
 EOF
 
 sudo apt install -y xclip
