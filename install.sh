@@ -66,7 +66,7 @@ initial_window_height 1080
 # new windows/tabs inherit cwd
 map ctrl+shift+enter launch --cwd=current
 map ctrl+shift+t launch --cwd=current --type=tab
-map ctrl+shift+t launch --type=tab
+map ctrl+shift+y launch --type=tab
 EOF
 
 cat > ~/.config/kitty/ssh.conf << 'EOF'
