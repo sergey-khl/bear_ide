@@ -77,12 +77,16 @@ return {
           "css-lsp",
           "prettier",
           "pyright",
+          "typescript-language-server",
+          "vue-language-server",
+          "eslint-lsp",
           "clang-format",
           "clangd",
           "gersemi",
           "markdownlint",
           "shellcheck",
           "shfmt",
+          "tree-sitter-cli",
         },
       })
     end,
@@ -95,24 +99,46 @@ return {
     dependencies = { "OXY2DEV/markview.nvim" },
     config = function(_)
       local to_install = {
+        -- Neovim / Lua
         "vim", "lua", "vimdoc", "luadoc", "query",
-        "html", "css", "javascript", "typescript", "json",
+
+        -- Web (JS/TS/Vue stack)
+        "html", "css",
+        "javascript",          -- JS core
+        "typescript",          -- TS core
+        "jsdoc",               -- JSDoc comment blocks inside JS/TS
+        "tsx",                 -- React JSX/TSX (needed by ts_ls for .tsx files)
+        "vue",                 -- Vue SFCs (.vue) — treesitter for <template> blocks
+        "json", "json5",       -- package.json, tsconfig, etc.
+        "graphql",             -- common in Vue/TS projects
+
+        -- Python
         "python",
+
+        -- C# (stable on all Ubuntu versions)
         "c_sharp",
-        -- 4. ROS & Systems (Crucial for C++ nodes & build)
+
+        -- C / C++ / ROS
         "c", "cpp",
-        "cmake",
-        "make",
+
+        -- Build systems
+        "cmake",               -- CMakeLists.txt
+        "make",                -- Makefile
+
+        -- Shell / Scripting
         "bash",
-        -- 5. Config & Data (ROS params, URDFs, Launch files)
-        "yaml",             -- Critical for ROS .yaml param files
-        "xml",              -- Critical for URDF, SDF, and package.xml
-        "toml",             -- For Rust or Python tool configs (pyproject.toml)
-        -- 6. Documentation
-        "markdown",         -- Structure of markdown files
-        "markdown_inline",  -- **Bold**, *Italic*, and code blocks inside markdown
-        "rst",              -- reStructuredText (Standard for Python Sphinx docs)
-        -- 7. Git (Helpful for diffs and commit messages)
+
+        -- Config & Data (ROS params, URDFs, launch files)
+        "yaml",                -- ROS .yaml param files
+        "xml",                 -- URDF, SDF, package.xml
+        "toml",                -- pyproject.toml, Cargo.toml
+
+        -- Documentation
+        "markdown",            -- Markdown structure
+        "markdown_inline",     -- Bold/italic/code inside markdown
+        "rst",                 -- reStructuredText (Sphinx / ROS docs)
+
+        -- Git
         "git_config", "gitcommit", "gitignore", "diff",
       }
       require'nvim-treesitter'.install(to_install)
