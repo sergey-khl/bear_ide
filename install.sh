@@ -68,7 +68,12 @@ map ctrl+shift+enter launch --cwd=current
 map ctrl+shift+t launch --cwd=current --type=tab
 EOF
 
-sudo apt install -y xclip
+cat > ~/.config/kitty/ssh.conf << 'EOF'
+hostname *
+
+color_scheme Dimmed Monokai
+env KITTY_IS_REMOTE=true
+EOF
 
 # zsh + oh-my-zsh + plugins
 sudo apt install -y zsh
@@ -107,6 +112,7 @@ export FZF_BASE="$HOME/.fzf"
 export PATH="$HOME/.local/nvim/bin:$HOME/.local/bin:$PATH"
 
 alias lg="lazygit"
+alias ssh="kitten ssh"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
