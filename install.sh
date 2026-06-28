@@ -27,7 +27,7 @@ mv ~/.local/nvim-linux-x86_64 ~/.local/nvim
 rm nvim-linux-x86_64.tar.gz
 
 cd ~/.local/bin || exit
-sudo apt-get update && sudo apt-get install -y ripgrep
+sudo apt-get update && sudo apt-get install -y ripgrep xsel wl-clipboard
 
 # make sure no one else has nvim before running
 sudo rm -rf ~/.config/nvim
