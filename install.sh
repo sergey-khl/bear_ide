@@ -63,6 +63,8 @@ remember_window_size  no
 initial_window_width  1920
 initial_window_height 1080
 
+clipboard_control write-clipboard read-clipboard write-primary read-primary
+
 # new windows/tabs inherit cwd
 map ctrl+shift+enter launch --cwd=current
 map ctrl+shift+t launch --cwd=current --type=tab
@@ -103,6 +105,30 @@ ZSH_THEME="robbyrussell"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
+
+# -- Environment tag in prompt --
+# Capture robbyrussell's prompt before we touch it
+_BASE_PROMPT="$PROMPT"
+
+_get_env_tag() {
+  # SSH: check standard vars + kitty's remote marker
+  if [[ -n "${SSH_CLIENT}${SSH_TTY}" ]] || [[ -n "$KITTY_IS_REMOTE" ]]; then
+    printf '%%F{yellow}[ssh:%s]%%f ' "$(hostname -s)"
+  # Docker: /.dockerenv exists on all versions; cgroup fallback for edge cases
+  elif [[ -f /.dockerenv ]] || grep -qaE 'docker|lxc' /proc/1/cgroup 2>/dev/null; then
+    # Pass CONTAINER_NAME via `docker run -e CONTAINER_NAME=foo` for a real name,
+    # otherwise falls back to the container's hostname (short ID)
+    local cname="${CONTAINER_NAME:-$(hostname -s)}"
+    printf '%%F{cyan}[docker:%s]%%f ' "$cname"
+  fi
+}
+
+_prepend_env_tag() {
+  PROMPT="$(_get_env_tag)${_BASE_PROMPT}"
+}
+
+add-zsh-hook precmd _prepend_env_tag
+# -- end env tag --
 
 # fzf
 export FZF_BASE="$HOME/.fzf"
