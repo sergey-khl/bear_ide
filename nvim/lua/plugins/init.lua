@@ -16,7 +16,6 @@ return {
         },
       }
       require("oil").setup(opts)
-      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
     end,
   },
   {
@@ -69,23 +68,42 @@ return {
 
       mason.setup()
 
+      -- Keep this in sync with the `servers` list in lspconfig.lua. If a
+      -- server is enabled there but missing here, vim.lsp.enable() tries to
+      -- start a binary that was never installed.
       mason_tool_installer.setup({
         ensure_installed = {
+          -- lua
           "lua-language-server",
           "stylua",
+          -- web
           "html-lsp",
           "css-lsp",
-          "prettier",
-          "pyright",
           "typescript-language-server",
           "vue-language-server",
           "eslint-lsp",
-          "clang-format",
+          "json-lsp",
+          "prettier",
+          -- python
+          "pyright",
+          -- c / c++ / cmake
           "clangd",
-          "gersemi",
-          "markdownlint",
+          "clang-format",
+          "cmake-language-server",
+          -- c#
+          "omnisharp",
+          -- config / data / shell
+          "yaml-language-server",
+          "bash-language-server",
           "shellcheck",
           "shfmt",
+          "gersemi",
+          -- docs
+          "markdownlint",
+          "lemminx",
+          "marksman",
+          "texlab",
+          -- treesitter
           "tree-sitter-cli",
         },
       })
@@ -192,8 +210,5 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     opts = {},
-    config = function()
-        require("ibl").setup() 
-    end,
-  }
+  },
 }
