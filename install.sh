@@ -147,6 +147,9 @@ export FZF_BASE="$HOME/.fzf"
 export PATH="$HOME/.local/nvim/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
+export DEEPSEEK_API_KEY=""
+export DEEPSEEK_USE_LOCAL=false
+
 alias lg="lazygit"
 alias ssh="kitten ssh"
 
