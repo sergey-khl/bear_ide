@@ -144,7 +144,7 @@ export FZF_BASE="$HOME/.fzf"
 [ -f "$HOME/.fzf/completion.zsh" ] && source "$HOME/.fzf/completion.zsh"
 
 # nvim + local bin on PATH
-export PATH="$HOME/.local/nvim/bin"
+export PATH="$HOME/.local/nvim/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 alias lg="lazygit"
