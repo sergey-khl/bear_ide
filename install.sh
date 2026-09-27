@@ -53,7 +53,7 @@ rm -f LICENSE.md README.md Hack.zip
 fc-cache -fv
 
 # kitty terminal
-sudo apt install kitty
+sudo apt install -y kitty
 mkdir -p ~/.config/kitty
 cat > ~/.config/kitty/kitty.conf << 'EOF'
 font_family      Hack Nerd Font
@@ -144,7 +144,8 @@ export FZF_BASE="$HOME/.fzf"
 [ -f "$HOME/.fzf/completion.zsh" ] && source "$HOME/.fzf/completion.zsh"
 
 # nvim + local bin on PATH
-export PATH="$HOME/.local/nvim/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/nvim/bin"
+export PATH="$HOME/.local/bin:$PATH"
 
 alias lg="lazygit"
 alias ssh="kitten ssh"
@@ -159,7 +160,7 @@ EOF
 chsh -s "$(which zsh)"
 
 # terminal multiplexer
-sudo apt install tmux
+sudo apt install -y tmux
 ln -sfn "$INSTALL_DIR"/.tmux.conf "$HOME/.tmux.conf"
 
 # git manager
@@ -187,7 +188,7 @@ nvm use v18.19.1
 # load node immediately
 export PATH="$NVM_DIR/versions/node/v18.19.1/bin:$PATH"
 
-sudo apt install python3-venv # needed for some lsp
+sudo apt install -y python3-venv # needed for some lsp
 npm install -g npm@9.2.0
 
 if [ -n "$UBUNTU_VER" ] && [ "$UBUNTU_VER" -ge 22 ]; then
@@ -197,5 +198,25 @@ else
     echo "Version is < 22 (or unknown). Installing treesitter for older Linux..."
     npm install -g tree-sitter-cli@0.22.6
 fi
+
+echo "Installing deepseek if DEEPSEEK_API_KEY set in rc"
+if [ -n "${DEEPSEEK_API_KEY:-}" ]; then
+  npm install -g @vegamo/deepcode-cli
+ 
+  mkdir -p "$HOME/.deepcode"
+  cat > "$HOME/.deepcode/settings.json" << EOF
+{
+  "env": {
+    "MODEL": "deepseek-v4-pro",
+    "BASE_URL": "https://api.deepseek.com",
+    "API_KEY": "$DEEPSEEK_API_KEY"
+  },
+  "thinkingEnabled": true,
+  "reasoningEffort": "max"
+}
+EOF
+  chmod 600 "$HOME/.deepcode/settings.json"
+fi
+ 
 
 echo "Done! Log out and back in for zsh to become your default shell."
