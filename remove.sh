@@ -22,18 +22,18 @@ rm -f "$HOME/.local/share/fonts/Hack"*.ttf
 rm -f "$HOME/.local/share/fonts/NerdFontMono-Regular.ttf" 2>/dev/null
 fc-cache -fv
 
-sudo rm -rf "$HOME/.local/nvim"
+rm -rf "$HOME/.local/nvim"
 
 echo "Removing Kitty..."
 rm -rf "$HOME/.config/kitty"
 
 if [ -L "$HOME/.config/nvim" ]; then
-    sudo rm "$HOME/.config/nvim"
+    rm "$HOME/.config/nvim"
     echo "Neovim config symlink removed."
 fi
 
-sudo rm -rf "$HOME/.local/state/nvim"
-sudo rm -rf "$HOME/.local/share/nvim"
+rm -rf "$HOME/.local/state/nvim"
+rm -rf "$HOME/.local/share/nvim"
 
 sed -i '\|export PATH="\$HOME/.local/nvim/bin:\$PATH"|d' "$HOME/.bashrc"
 sed -i '\|export PATH="\$HOME/.local/nvim/bin:\$PATH"|d' "$HOME/.zshrc"
