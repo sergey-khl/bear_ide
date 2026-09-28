@@ -1,3 +1,3 @@
 require "custom.options"
-require "custom.clipboard"
+require "custom.clipboard".setup()
 require "custom.keymaps"
