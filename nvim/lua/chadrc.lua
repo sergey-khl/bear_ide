@@ -8,9 +8,10 @@ local M = {}
 M.base46 = {
   theme = "neofusion",
   hl_override = {
-    Comment = { italic = true },
+    Comment = { fg = "#aac8f2", italic = true },
     LineNr = { fg = "#777777" },
     CursorLineNr = { fg = "#ffffff" },
+    ["@comment"] = { fg = "#aac8f2", italic = true },
   },
 }
 
