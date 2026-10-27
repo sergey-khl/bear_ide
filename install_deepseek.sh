@@ -10,14 +10,15 @@ mkdir -p "$HOME/.deepcode"
 
 SETTINGS="$HOME/.deepcode/settings.json"
 
-# Default to local ds4 model if no API key is provided
-if [ -z "${DEEPSEEK_API_KEY:-}" ]; then
+USE_LOCAL="$(printf '%s' "${DEEPSEEK_USE_LOCAL:-false}" | tr '[:upper:]' '[:lower:]')"
+
+if [ "$USE_LOCAL" = "true" ] || [ "$USE_LOCAL" = "1" ]; then
   printf 'DEEPSEEK_API_KEY is not set, defaulting to local ds4 model.\n'
-  MODEL="DeepSeek-V4.1-Flash"
-  BASE_URL="http://127.0.0.1:8008"
+  MODEL="deepseek-v4.1-flash"
+  BASE_URL="http://127.0.0.1:8008/v1"
   API_KEY="local"
 else
-  MODEL="deepseek-v4-pro"
+  MODEL="deepseek-v4-flash"
   BASE_URL="https://api.deepseek.com"
   API_KEY="$DEEPSEEK_API_KEY"
 fi
@@ -33,7 +34,7 @@ settings = {
         "API_KEY": os.environ["API_KEY"],
     },
     "thinkingEnabled": True,
-    "reasoningEffort": "max",
+    "reasoningEffort": "low",
 }
 
 with open(sys.argv[1], "w", encoding="utf-8") as fh:
