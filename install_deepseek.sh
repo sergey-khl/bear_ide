@@ -34,9 +34,7 @@ settings = {
         "API_KEY": os.environ["API_KEY"],
     },
     "thinkingEnabled": True,
-    "reasoningEffort": "low",
-    "timeout": 300,
-    "streamIdleTimeout": 300
+    "reasoningEffort": "low"
 }
 
 with open(sys.argv[1], "w", encoding="utf-8") as fh:
