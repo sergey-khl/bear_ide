@@ -35,6 +35,8 @@ settings = {
     },
     "thinkingEnabled": True,
     "reasoningEffort": "low",
+    "timeout": 300,
+    "streamIdleTimeout": 300
 }
 
 with open(sys.argv[1], "w", encoding="utf-8") as fh:
