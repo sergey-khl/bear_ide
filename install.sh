@@ -101,7 +101,7 @@ mkdir -p "$HOME/.local/bin" "$HOME/.config" "$HOME/.local/share/fonts"
 #-- neovim ---------------------------------------------------------------------
 
 if [ "$MODERN" = true ]; then
-  NVIM_URL="https://github.com/neovim/neovim/releases/download/stable/nvim-linux-${NVIM_ARCH}.tar.gz"
+  NVIM_URL="https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-${NVIM_ARCH}.tar.gz"
 else
   NVIM_URL="https://github.com/neovim/neovim-releases/releases/download/v0.11.5/nvim-linux-${NVIM_ARCH}.tar.gz"
   # The "older glibc" mirror only publishes x86_64 builds. Fall back to the
