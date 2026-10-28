@@ -15,7 +15,7 @@ USE_LOCAL="$(printf '%s' "${DEEPSEEK_USE_LOCAL:-false}" | tr '[:upper:]' '[:lowe
 if [ "$USE_LOCAL" = "true" ] || [ "$USE_LOCAL" = "1" ]; then
   printf 'DEEPSEEK_API_KEY is not set, defaulting to local ds4 model.\n'
   MODEL="deepseek-v4.1-flash"
-  BASE_URL="http://127.0.0.1:8008/v1"
+  BASE_URL="http://127.0.0.1:8888/v1"
   API_KEY="local"
 else
   MODEL="deepseek-v4-flash"
