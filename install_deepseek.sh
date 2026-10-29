@@ -33,6 +33,7 @@ settings = {
         "BASE_URL": os.environ["BASE_URL"],
         "API_KEY": os.environ["API_KEY"],
     },
+    "contextWindow": "512K",
     "thinkingEnabled": True,
     "reasoningEffort": "low"
 }
